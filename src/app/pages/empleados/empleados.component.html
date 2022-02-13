@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <button routerLink="/cargos">Cargos</button>
+            <button>Genero</button>
+
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form [formGroup]="registroEmpleado" class="d-flex flex-column align-items-start">
+                <label for="">Identificación</label>
+                <input type="number" formControlName="identificacion">
+                <label for="">Nombres</label>
+                <input type="text" formControlName="nombres">
+                <label for="">Apellidos</label>
+                <input type="text" formControlName="apellidos">
+                <label for="">Cargo</label>
+                <select name="" id="" formControlName="cargo">
+                    <option *ngFor="let cargos of listaCargos" value={{cargos.dataCargo.cargo}}>{{cargos.dataCargo.cargo}}</option>
+                </select>
+                <label for="">Género</label>
+                <select name="" id="" formControlName="genero">
+                    <option *ngFor="let genero of listaGenero" value="{{genero.dataGenero.genero}}">{{genero.dataGenero.genero}}</option>
+                </select>
+                <div>
+
+                    <button (click)="postDataEmployee()">Agregar</button>
+                    <button  (click)="modificarEmpleado()">modificar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="listaEmpleados.length != 0; else vacio">
+        <div class="col">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Identificación</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Cargo</th>
+                    <th scope="col">Cargo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let empleado of listaEmpleados">
+                    <th scope="row">{{empleado.dataEmpleado.identificacion}}</th>
+                    <td>{{empleado.dataEmpleado.nombres}}</td>
+                    <td>{{empleado.dataEmpleado.apellidos}}</td>
+                    <td>{{empleado.dataEmpleado.genero}}</td>
+                    <td>{{empleado.dataEmpleado.cargo}}</td>
+                    <td>
+                        <button (click)="editarEmpleado(empleado)">Editar</button>
+                        <button (click)="eliminarEmpleado(empleado.id)">Eliminar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+
+    <ng-template  #vacio>
+        <div class="row">
+            <div class="col">
+                <p>No hay empleados registrados</p>
+            </div>
+        </div>
+
+    </ng-template>
+    
+</div>
